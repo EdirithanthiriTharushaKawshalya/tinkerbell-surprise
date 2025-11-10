@@ -32,6 +32,7 @@ export default function Snowfall() {
 
 // Separate component that only runs on the client
 function ClientSnowfall() {
+  const [isMobile, setIsMobile] = useState(false) // NEW: State to track mobile
   const [elements, setElements] = useState<
     Array<{
       id: number
@@ -44,23 +45,32 @@ function ClientSnowfall() {
   >([])
 
   useEffect(() => {
-    // Generate elements
     const width = window.innerWidth
+    
+    // NEW: Check if mobile on load
+    setIsMobile(width < 768)
 
-    const newElements = Array.from({ length: 150 }, (_, i) => ({
-      id: i,
-      x: Math.random() * width,
-      color: snowColors[Math.floor(Math.random() * snowColors.length)],
-      size: Math.random() * 3 + 1, // Snowflakes are 1px to 4px
-      speed: Math.random() * 15 + 10, // 10s to 25s duration
-      delay: Math.random() * 15, // Staggered start
-    }))
-
+    const newElements = Array.from(
+      // REDUCED: Changed from 150 to 75
+      { length: 75 }, 
+      (_, i) => ({
+        id: i,
+        x: Math.random() * width,
+        color: snowColors[Math.floor(Math.random() * snowColors.length)],
+        size: Math.random() * 3 + 1,
+        speed: Math.random() * 15 + 10,
+        delay: Math.random() * 15,
+      })
+    )
     setElements(newElements)
 
     // Handle window resize
     const handleResize = () => {
       const newWidth = window.innerWidth
+      
+      // NEW: Check if mobile on resize
+      setIsMobile(newWidth < 768)
+
       setElements((prev) =>
         prev.map((element) => ({
           ...element,
@@ -82,6 +92,13 @@ function ClientSnowfall() {
       clearTimeout(resizeTimer)
     }
   }, [])
+
+  // --- THIS IS THE KEY ---
+  // If we're on a small screen, don't render any snow at all.
+  if (isMobile) {
+    return null
+  }
+  // --- END OF KEY ---
 
   return (
     <div className="fixed inset-0 w-full h-full z-0 select-none" style={{ pointerEvents: "none" }}>
@@ -109,11 +126,13 @@ function FallingElement({
   delay: number
 }) {
   return (
+    // Use `x` on motion component for hardware-accelerated `transform`
+    // instead of animating the `cx` attribute
     <motion.circle
-      initial={{ y: -size * 2, cx: x, opacity: 0 }}
+      initial={{ y: -size * 2, x: x, opacity: 0 }}
       animate={{
         y: window.innerHeight + size * 2,
-        cx: x + (Math.random() > 0.5 ? 1 : -1) * Math.random() * 100, // Horizontal drift
+        x: x + (Math.random() > 0.5 ? 1 : -1) * Math.random() * 100, // Horizontal drift
         opacity: [0, 0.8, 0.8, 0], // Fade in and out
       }}
       transition={{
@@ -125,7 +144,7 @@ function FallingElement({
       }}
       r={size}
       fill={color}
-      style={{ filter: "blur(0.5px)" }} // Soft blur for a snow effect
+      // REMOVED: `filter: blur(0.5px)` was removed as it's very slow
     />
   )
 }
