@@ -47,21 +47,21 @@ export default function Final() {
           variants={itemVariants}
           className="text-3xl md:text-5xl font-bold text-pink-600 mb-6"
         >
-          Happy Birthday, My Love.
+          Happy 20th Birthday, my Tinkerbell.
         </motion.h1>
         
         <motion.p
           variants={itemVariants}
           className="text-xl md:text-2xl font-light mb-6"
         >
-          This was just a small way to show you how much you mean to me.
+          This entire journey from the cake to the memories was just a small token of a love that is bigger than any website I could ever build. You are my world.
         </motion.p>
         
         <motion.h2
           variants={itemVariants}
           className="text-2xl md:text-4xl font-bold text-purple-600 mb-12"
         >
-          I love you more than words can say.
+          I love you more than I can ever show you.
         </motion.h2>
 
         {/* New button to navigate to dashboard */}

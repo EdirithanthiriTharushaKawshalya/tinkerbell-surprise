@@ -58,11 +58,11 @@ export default function Welcome() {
         
         {/* Welcome Message [cite: 38, 39] */}
         <h1 className="text-4xl md:text-6xl font-bold text-pink-600 mb-8 animate-pulse">
-          Happy Birthday My Tinkerbell ❤️
+          Welcome to your 20s, my Tinkerbell ❤️
         </h1>
         
         <p className="text-xl md:text-2xl font-light mb-12">
-          The surprise is just beginning...
+          You didn't think this was the whole surprise, did you? Oh, we're just getting warmed up...
         </p>
 
         {/* Button to go to the next step */}

@@ -1,14 +1,28 @@
 // src/app/memories/page.tsx
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect, Suspense } from 'react'; // Import Suspense
+import { useRouter, useSearchParams } from 'next/navigation'; // Import useSearchParams
 import { storage } from '@/lib/firebase'; // Import our db AND storage
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import { motion } from 'framer-motion';
 
-export default function Memories() {
+// Wrap the page in Suspense for useSearchParams
+export default function MemoriesPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Memories />
+    </Suspense>
+  );
+}
+
+function Memories() {
   const router = useRouter();
+  const searchParams = useSearchParams(); // Get URL search params
+  
+  // Check if the 'from' param exists and equals 'dashboard'
+  const fromDashboard = searchParams.get('from') === 'dashboard';
+
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -47,9 +61,9 @@ export default function Memories() {
       
       {/* Header */}
       <h1 className="text-3xl md:text-5xl font-bold text-pink-600 mt-8 mb-4">
-        Our Memories
+        Remember When...
       </h1>
-      <p className="text-lg mb-8">A few moments we've shared...</p>
+      <p className="text-lg mb-8">A quick trip down memory lane, just for you.</p>
 
       {/* Image Gallery */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mb-8">
@@ -77,12 +91,17 @@ export default function Memories() {
 
       {/* === UPDATED NAVIGATION BUTTONS === */}
       <div className="flex flex-col sm:flex-row gap-4">
-        <button
-          onClick={() => router.push('/dashboard')}
-          className="px-8 py-4 bg-gray-500 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105"
-        >
-          Go to Dashboard
-        </button>
+        
+        {/* Only show this button if the user came from the dashboard */}
+        {fromDashboard && (
+          <button
+            onClick={() => router.push('/dashboard')}
+            className="px-8 py-4 bg-gray-500 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105"
+          >
+            Go to Dashboard
+          </button>
+        )}
+
         <button
           onClick={goToNextPage}
           className="px-8 py-4 bg-purple-500 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105"

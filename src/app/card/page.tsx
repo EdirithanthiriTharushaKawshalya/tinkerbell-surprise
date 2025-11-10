@@ -1,12 +1,27 @@
 // src/app/card/page.tsx
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, Suspense } from 'react'; // Import Suspense
+import { useRouter, useSearchParams } from 'next/navigation'; // Import useSearchParams
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Card() {
+// We must wrap the component that uses useSearchParams in a Suspense boundary.
+// A simple way is to create a child component for the page content.
+export default function CardPage() {
+  return (
+    // This Suspense boundary is required for useSearchParams to work
+    <Suspense fallback={<div>Loading...</div>}>
+      <Card />
+    </Suspense>
+  );
+}
+
+function Card() {
   const router = useRouter();
+  const searchParams = useSearchParams(); // Get URL search params
+  
+  // Check if the 'from' param exists and equals 'dashboard'
+  const fromDashboard = searchParams.get('from') === 'dashboard';
   
   // State to track if the letter modal is open
   const [isOpen, setIsOpen] = useState(false);
@@ -37,8 +52,6 @@ export default function Card() {
       {/* Envelope Wrapper */}
       <div className="relative w-[300px] h-[200px] mb-8">
         
-        {/* === THE OLD SLIDING CARD IS REMOVED === */}
-
         {/* Envelope Back */}
         <div className="absolute w-full h-full bg-pink-300 rounded-lg shadow-xl" style={{ zIndex: 10 }} />
         
@@ -91,7 +104,6 @@ export default function Card() {
         {isOpen && (
           <motion.div
             key="letterModal"
-            // MODIFIED: Changed z-50 to z-[200] to ensure it's on top
             className="fixed inset-0 z-[200] bg-white p-6 sm:p-12 overflow-y-auto"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1, transition: { duration: 0.4, ease: "easeOut" } }}
@@ -161,15 +173,19 @@ export default function Card() {
       {/* === END OF MODAL === */}
 
       
-      {/* Dashboard button is always visible, but pushed down */}
-      <div className="mt-6">
-        <button
-          onClick={() => router.push('/dashboard')}
-          className="px-6 py-3 bg-white text-purple-600 font-bold rounded-full shadow-md transition-transform transform hover:scale-105 border border-purple-200"
-        >
-          Go to Dashboard
-        </button>
-      </div>
+      {/* === UPDATED DASHBOARD BUTTON === */}
+      {/* Only show this button if the user came from the dashboard */}
+      {fromDashboard && (
+        <div className="mt-6">
+          <button
+            onClick={() => router.push('/dashboard')}
+            className="px-6 py-3 bg-white text-purple-600 font-bold rounded-full shadow-md transition-transform transform hover:scale-105 border border-purple-200"
+          >
+            Go to Dashboard
+          </button>
+        </div>
+      )}
+      {/* === END OF UPDATE === */}
 
     </main>
   );

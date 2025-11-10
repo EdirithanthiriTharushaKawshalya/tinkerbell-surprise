@@ -89,14 +89,11 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-gradient-to-t from-pink-200 to-purple-200 text-gray-800">
       
-      {/* Landing Text [cite: 39] */}
-      <h1 className="text-4xl md:text-6xl font-bold text-pink-600 mb-4">
-        Happy Birthday My Tinkerbell ❤️
-      </h1>
+  
 
       {/* Countdown Text [cite: 41] */}
       <p className="text-2xl md:text-3xl font-light mb-8">
-        You’re not allowed to peek yet! 🎁⏳
+        You’re not allowed to peek yet darling!⏳
       </p>
 
       {/* The Timer */}

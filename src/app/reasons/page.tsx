@@ -61,9 +61,9 @@ export default function Reasons() {
       
       {/* Header */}
       <h1 className="text-3xl md:text-5xl font-bold text-pink-600 mt-8 mb-4">
-        100 Reasons Why I Love You
+        Why I Love You:
       </h1>
-      <p className="text-lg mb-8">...here are the first 10 to start!</p>
+      <p className="text-lg mb-8">An Incomplete List Starting with these 10...</p>
 
       {/* Reasons List */}
       <div className="w-full max-w-lg mb-8">

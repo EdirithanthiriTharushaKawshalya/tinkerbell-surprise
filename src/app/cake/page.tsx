@@ -26,7 +26,7 @@ export default function Cake() {
       
       {/* Title - Removed mb-4 to group it with the cake below */}
       <h1 className="text-3xl md:text-5xl font-bold text-pink-600 mb-20">
-        Make a Wish...
+        Make A Wish, My Love.
       </h1>
 
       {/* The Cake & Candle - Added mt-8 to group with title, mb-8 remains */}
@@ -77,7 +77,7 @@ export default function Cake() {
         </button>
       ) : (
         <p className="text-2xl font-light text-pink-600 animate-pulse">
-          Wish made! ❤️
+          I hope all your wishes come true, my love. ❤️
         </p>
       )}
     </main>
