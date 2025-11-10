@@ -10,14 +10,14 @@ export default function Home() {
   const router = useRouter();
 
   // State to hold the countdown parts
-  const [days, setDays] = useState(0);
+  const [days, setDays] =useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [isUnlocked, setIsUnlocked] = useState(false);
 
-  // Target unlock time from your documentation [cite: 7]
+  // Target unlock time from your documentation
   const targetTimezone = 'Asia/Colombo'; // (GMT+5:30)
 
   useEffect(() => {
@@ -69,7 +69,7 @@ export default function Home() {
   // 3. Handle redirection when unlocked
   useEffect(() => {
     if (isUnlocked) {
-      // Redirect to the welcome page as per your page flow [cite: 24]
+      // Redirect to the welcome page as per your page flow
       router.push('/welcome');
     }
   }, [isUnlocked, router]);
@@ -79,7 +79,7 @@ export default function Home() {
   // Show a loading screen while we get the time
   if (isLoading) {
     return (
-      <main className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+      <main className="flex items-center justify-center min-h-screen bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
         <p>Connecting to surprise...</p>
       </main>
     );
@@ -87,11 +87,11 @@ export default function Home() {
 
   // The main countdown UI
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-gradient-to-t from-pink-200 to-purple-200 text-gray-800">
+    <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
       
   
 
-      {/* Countdown Text [cite: 41] */}
+      {/* Countdown Text */}
       <p className="text-2xl md:text-3xl font-light mb-8">
         You’re not allowed to peek yet darling!⏳
       </p>

@@ -77,8 +77,7 @@ function InteractiveCard() {
           {/* === UPDATE === */}
           <p
             className="text-gray-700 text-sm cursor-pointer hover:underline"
-            // Add ?from=dashboard to the URL
-            onClick={() => router.push('/card?from=dashboard')}
+            onClick={() => router.push('/card')} // Add navigation onClick
           >
             Want to re-read your letter darling?
           </p>
@@ -136,8 +135,7 @@ export default function Dashboard() {
           icon: doc.data().icon || '❤️',
         }));
         setReasons(reasonsList);
-      } catch (error)
-{
+      } catch (error) {
         console.error("Error fetching reasons:", error);
       } finally {
         setIsLoading(false);
@@ -154,7 +152,7 @@ export default function Dashboard() {
   };
 
   return (
-    <main className="flex flex-col items-center min-h-screen p-4 md:p-8 bg-gradient-to-b from-purple-100 to-pink-100 text-gray-800">
+    <main className="flex flex-col items-center min-h-screen p-4 md:p-8 bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
       <h1 className="text-3xl md:text-5xl font-bold text-pink-600 mt-8 mb-8">
         A Collection for My Love ❤️
       </h1>
@@ -163,7 +161,7 @@ export default function Dashboard() {
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Card 1: Random Reason */}
-        <div className="bg-white/70 rounded-lg shadow-lg p-6 flex flex-col items-center justify-between min-h-[250px]">
+        <div className="bg-white/70 rounded-4xl shadow-lg p-6 flex flex-col items-center justify-between min-h-[250px]">
           <h2 className="text-2xl font-bold text-pink-600 mb-4">Reasons I'm Obsessed</h2>
           <div className="flex-grow flex items-center justify-center">
             <AnimatePresence mode="wait">
@@ -192,11 +190,10 @@ export default function Dashboard() {
           </button>
         </div>
 
-        {/* Card 2: Memories Link (UPDATED) */}
+        {/* Card 2: Memories Link */}
         <motion.div
-          // Add ?from=dashboard to the URL
           onClick={() => router.push('/memories?from=dashboard')}
-          className="bg-white/70 rounded-lg shadow-lg p-6 flex flex-col items-center justify-center min-h-[250px] cursor-pointer"
+          className="bg-white/70 rounded-4xl shadow-lg p-6 flex flex-col items-center justify-center min-h-[250px] cursor-pointer"
           whileHover={{ scale: 1.03 }}
         >
           <h2 className="text-2xl font-bold text-pink-600 mb-4">The Story of Us</h2>
@@ -205,12 +202,12 @@ export default function Dashboard() {
         </motion.div>
 
         {/* Card 3: Interactive Cake */}
-        <div className="bg-white/70 rounded-lg shadow-lg p-6">
+        <div className="bg-white/70 rounded-4xl shadow-lg p-6">
           <InteractiveCake />
         </div>
         
         {/* Card 4: Interactive Card */}
-        <div className="bg-white/70 rounded-lg shadow-lg p-6">
+        <div className="bg-white/70 rounded-4xl shadow-lg p-6">
           <InteractiveCard />
         </div>
 

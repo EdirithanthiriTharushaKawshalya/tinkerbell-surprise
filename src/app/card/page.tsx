@@ -32,7 +32,7 @@ function Card() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-b from-purple-100 to-pink-100 text-gray-800">
+    <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
       
       {/* This h1 is visible when the modal is closed */}
       <AnimatePresence>
@@ -121,7 +121,7 @@ function Card() {
                   Today is such a huge milestone. You're officially stepping into a new decade, and I feel like the luckiest person in the world that I get to be by your side for it. It feels like just yesterday we were holding hands while walking home on the school road on a random Saturday after physics class. Do you remember our first kiss on the corner of that road?, and now, here we are.
                 </p>
                 <p>
-                  As you've probably seen by now, I’ve been trying to put into words just how much you mean to me. A hundred reasons honestly just scratches the surface. How do you even begin to list all the things you love about someone?
+                  As you've probably seen by now, I've been trying to put into words just how much you mean to me. A hundred reasons honestly just scratches the surface. How do you even begin to list all the things you love about someone?
                 </p>
                 <p>
                    I love you for all the big things: your incredible and compassionate heart, and the way you speak about my qualities. That is the main reason I strive to be a better man for you, my baby. I truly appreciate how much you care about me. I feel so lucky to have you, my princess.
@@ -130,7 +130,7 @@ function Card() {
                   I'm obsessed with the little things. I love how your eyes light up when you're in my arms. I love the way you laugh at my silliest jokes. I cherish the moments when you pull me closer, kiss me, and give me tight hugs after we've shared our time together.
                 </p>
                 <p>
-                  Being with you is like... coming home. You are my best friend, my safe space, and my greatest adventure, all rolled into one. You’ve brought so much passion, laughter, and light into my world. You make me feel seen and loved in a way I never knew was possible.
+                  Being with you is like... coming home. You are my best friend, my safe space, and my greatest adventure, all rolled into one. You've brought so much passion, laughter, and light into my world. You make me feel seen and loved in a way I never knew was possible.
                 </p>
                 <p>
                    I am so incredibly proud of the woman you are and the one you are becoming. As you start your twenties, I hope this new chapter brings you all the success and happiness you deserve. You deserve the entire world, my dear bunny.

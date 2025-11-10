@@ -57,7 +57,7 @@ export default function Reasons() {
   };
 
   return (
-    <main className="flex flex-col items-center min-h-screen p-8 bg-gradient-to-b from-purple-100 to-pink-100 text-gray-800">
+    <main className="flex flex-col items-center min-h-screen p-8 bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
       
       {/* Header */}
       <h1 className="text-3xl md:text-5xl font-bold text-pink-600 mt-8 mb-4">

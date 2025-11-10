@@ -39,7 +39,7 @@ export default function Welcome() {
 
   // Function to go to the next page, as per your page flow
   const goToNextPage = () => {
-    router.push('/cake'); // Navigates to the cake page [cite: 24]
+    router.push('/cake'); // Navigates to the cake page
   };
 
   return (
@@ -54,9 +54,9 @@ export default function Welcome() {
       />
       
       {/* Page Content */}
-      <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-gradient-to-b from-purple-100 to-pink-100 text-gray-800">
+      <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
         
-        {/* Welcome Message [cite: 38, 39] */}
+        {/* Welcome Message */}
         <h1 className="text-4xl md:text-6xl font-bold text-pink-600 mb-8 animate-pulse">
           Welcome to your 20s, my Tinkerbell ❤️
         </h1>
