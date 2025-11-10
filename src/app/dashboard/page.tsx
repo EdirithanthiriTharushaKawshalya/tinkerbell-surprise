@@ -13,12 +13,13 @@ function InteractiveCake() {
   return (
     <div className="flex flex-col items-center justify-center p-4">
       <h2 className="text-xl font-bold text-pink-600 mb-4">Make Another Wish</h2>
+      
       {/* Cake & Candle */}
       <div className="relative mb-8 mt-12">
         <AnimatePresence>
           {isLit && (
             <motion.div
-              className="w-3 h-6 bg-yellow-400 rounded-t-full rounded-b-lg absolute left-1/2 -translate-x-1/2 -top-12"
+              className="w-3 h-6 bg-yellow-400 rounded-t-full rounded-b-lg absolute left-1/2 -translate-x-1/2 -top-12 z-30"
               style={{ boxShadow: '0 0 10px 3px #fde047' }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -26,8 +27,24 @@ function InteractiveCake() {
             />
           )}
         </AnimatePresence>
-        <div className="w-4 h-8 bg-white rounded-t-md absolute left-1/2 -translate-x-1/2 -top-8" />
-        <div className="w-48 h-24 bg-pink-300 rounded-lg shadow-md" />
+        
+        {/* Candle - Added z-20 */}
+        <div className="w-4 h-8 bg-white rounded-t-md absolute left-1/2 -translate-x-1/2 -top-8 z-20" />
+        
+        {/* === NEW CAKE STRUCTURE (Scaled Down) === */}
+        <div className="flex flex-col items-center">
+          
+          {/* Top Tier (Frosting) - Scaled down from w-56, h-20 */}
+          <div className="w-36 h-14 bg-white rounded-lg shadow-lg z-10" />
+          
+          {/* Middle Tier - Scaled down from w-64, h-20 */}
+          <div className="w-44 h-14 bg-pink-400 rounded-lg shadow-md -mt-3 z-0" />
+          
+          {/* Bottom Tier - Scaled down from w-72, h-24 */}
+          <div className="w-48 h-16 bg-pink-300 rounded-lg shadow-xl -mt-3" />
+        </div>
+        {/* === END NEW CAKE === */}
+
       </div>
       <button
         onClick={() => setIsLit(!isLit)}
@@ -39,9 +56,11 @@ function InteractiveCake() {
   );
 }
 
-// --- Re-usable Card Component ---
+// --- Re-usable Card Component (UPDATED) ---
 function InteractiveCard() {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter(); // Get router instance
+
   return (
     <div className="flex flex-col items-center justify-center p-4">
       <h2 className="text-xl font-bold text-pink-600 mb-4">Your Letter</h2>
@@ -50,19 +69,34 @@ function InteractiveCard() {
         <motion.div
           className="absolute w-[200px] h-[130px] bg-white shadow-lg rounded-lg p-4 text-center"
           style={{ top: 10, left: 10, zIndex: 100 }}
-          animate={{ y: isOpen ? -130 : 0 }}
+          animate={{ y: isOpen ? -130 : 0, zIndex: isOpen ? 110 : 100 }}
           transition={{ duration: 0.7, delay: 0.5 }}
         >
           <p className="text-md text-pink-500">My Dearest Tinkerbell,</p>
-          <p className="text-gray-700 text-sm">Click to re-read your letter...</p>
+          
+          {/* === UPDATE === */}
+          <p
+            className="text-gray-700 text-sm cursor-pointer hover:underline"
+            onClick={() => router.push('/card')} // Add navigation onClick
+          >
+            Click to re-read your letter...
+          </p>
+          {/* === END UPDATE === */}
+
         </motion.div>
+        
+        {/* Envelope Back */}
         <div className="absolute w-full h-full bg-pink-300 rounded-lg shadow-xl" style={{ zIndex: 10 }} />
+        
+        {/* Envelope Flap */}
         <motion.div
           className="absolute w-full h-1/2 bg-pink-400 rounded-t-lg"
           style={{ originY: 'bottom', zIndex: 10, clipPath: 'polygon(0 0, 100% 0, 50% 100%)' }}
           animate={{ rotateX: isOpen ? 180 : 0, zIndex: isOpen ? 0 : 120 }}
           transition={{ duration: 0.5 }}
         />
+        
+        {/* Envelope Front (This was covering the letter) */}
         <div className="absolute w-full h-full bg-pink-300 rounded-lg" style={{ zIndex: 105 }} />
       </div>
       <button
@@ -84,7 +118,7 @@ interface Reason {
 
 // --- Main Dashboard Page ---
 export default function Dashboard() {
-  const router = useRouter();
+  const router = useRouter(); // This router is used by the Memories card
   const [reasons, setReasons] = useState<Reason[]>([]);
   const [currentReason, setCurrentReason] = useState<Reason | null>(null);
   const [isLoading, setIsLoading] = useState(true);

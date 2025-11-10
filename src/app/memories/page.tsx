@@ -75,13 +75,22 @@ export default function Memories() {
         )}
       </div>
 
-      {/* Navigation Button */}
-      <button
-        onClick={goToNextPage}
-        className="px-8 py-4 bg-purple-500 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105"
-      >
-        The Final Surprise
-      </button>
+      {/* === UPDATED NAVIGATION BUTTONS === */}
+      <div className="flex flex-col sm:flex-row gap-4">
+        <button
+          onClick={() => router.push('/dashboard')}
+          className="px-8 py-4 bg-gray-500 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105"
+        >
+          Go to Dashboard
+        </button>
+        <button
+          onClick={goToNextPage}
+          className="px-8 py-4 bg-purple-500 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105"
+        >
+          The Final Surprise
+        </button>
+      </div>
+      {/* === END UPDATED NAVIGATION === */}
     </main>
   );
 }

@@ -34,7 +34,7 @@ export default function Card() {
           animate={{ y: isOpen ? -180 : 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
         >
-          {/* Your placeholder message [cite: 36] */}
+          {/* Your placeholder message */}
           <p className="text-lg text-pink-500 mb-4">My Dearest Tinkerbell,</p>
           <p className="text-gray-700">
             This is just the placeholder for the romantic card message.
@@ -76,28 +76,55 @@ export default function Card() {
       </div>
 
       {/* Button to Open/Continue */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {!isOpen ? (
           <motion.button
+            key="open"
             onClick={() => setIsOpen(true)}
             className="px-8 py-4 bg-purple-500 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105"
-            initial={{ opacity: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             Open the Letter 💌
           </motion.button>
         ) : (
-          <motion.button
-            onClick={goToNextPage}
-            className="px-8 py-4 bg-pink-500 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105"
+          <motion.div
+            key="actions"
+            className="flex flex-col sm:flex-row gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ delay: 0.5 }} // Shortened delay to feel responsive
           >
-            See What's Next
-          </motion.button>
+            {/* NEW Close Button */}
+            <button
+              onClick={() => setIsOpen(false)} // Sets state back to false
+              className="px-8 py-4 bg-gray-500 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105"
+            >
+              Close Letter
+            </button>
+            
+            {/* Existing Continue Button */}
+            <button
+              onClick={goToNextPage}
+              className="px-8 py-4 bg-pink-500 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105"
+            >
+              See What's Next
+            </button>
+          </motion.div>
         )}
       </AnimatePresence>
+      
+      {/* === NEW DASHBOARD BUTTON === */}
+      <button
+        onClick={() => router.push('/dashboard')}
+        className="mt-6 px-6 py-3 bg-white text-purple-600 font-bold rounded-full shadow-md transition-transform transform hover:scale-105 border border-purple-200"
+      >
+        Go to Dashboard
+      </button>
+      {/* === END NEW DASHBOARD BUTTON === */}
+
     </main>
   );
 }
