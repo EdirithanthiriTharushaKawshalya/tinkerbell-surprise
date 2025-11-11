@@ -81,7 +81,14 @@ export default function Home() {
   if (isLoading) {
     return (
       <main className="flex items-center justify-center min-h-screen bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
-        <p>Connecting to surprise...</p>
+        <Image
+        src="/loding.gif" // IMPORTANT: Add 'bunny.gif' to your /public folder
+        alt="Animated bunny peeking"
+        width={200}
+        height={200}
+        unoptimized={true} // Good for GIFs to prevent optimization issues
+        className="mb-4"
+      />
       </main>
     );
   }

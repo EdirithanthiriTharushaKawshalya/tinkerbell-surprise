@@ -78,7 +78,8 @@ function InteractiveCard() {
           {/* === UPDATE === */}
           <p
             className="text-gray-700 text-sm cursor-pointer hover:underline"
-            onClick={() => router.push('/card')} // Add navigation onClick
+            // ADDED ?from=dashboard TO THE URL
+            onClick={() => router.push('/card?from=dashboard')}
           >
             Want to re-read your letter darling?
           </p>
@@ -153,7 +154,7 @@ export default function Dashboard() {
   };
 
   return (
-    <main className="flex flex-col items-center min-h-screen p-4 md:p-8 bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
+    <main className="relative z-10 flex flex-col items-center min-h-screen p-4 md:p-8 bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
       <Image
                           src="/love.gif" // IMPORTANT: Add 'bunny.gif' to your /public folder
                           alt="Animated bunny peeking"
@@ -205,7 +206,14 @@ export default function Dashboard() {
           whileHover={{ scale: 1.03 }}
         >
           <h2 className="text-2xl font-bold text-pink-600 mb-4">The Story of Us</h2>
-          <p className="text-5xl mb-4">📸</p>
+          <Image
+                          src="/heart love.gif" // IMPORTANT: Add 'bunny.gif' to your /public folder
+                          alt="Animated heart love"
+                          width={100}
+                          height={100}
+                          unoptimized={true} 
+                          className="mb-4"
+                        />
           <p className="text-gray-700 text-lg">Take a walk down memory lane</p>
         </motion.div>
 

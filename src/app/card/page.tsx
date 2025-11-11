@@ -4,6 +4,7 @@
 import { useState, Suspense } from 'react'; // Import Suspense
 import { useRouter, useSearchParams } from 'next/navigation'; // Import useSearchParams
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 // We must wrap the component that uses useSearchParams in a Suspense boundary.
 // A simple way is to create a child component for the page content.
@@ -32,7 +33,7 @@ function Card() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
+    <main className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
       
       {/* This h1 is visible when the modal is closed */}
       <AnimatePresence>
@@ -43,7 +44,7 @@ function Card() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
           >
-            A Special Letter for You
+            A Special Letter for You!
           </motion.h1>
         )}
       </AnimatePresence>
@@ -112,7 +113,21 @@ function Card() {
             {/* Letter Content Wrapper */}
             <div className="max-w-3xl mx-auto my-8 text-gray-800">
               
-              <h2 className="text-3xl text-pink-500 mb-6 font-semibold">My Dearest Tinkerbell,</h2>
+              {/* --- MODIFIED SECTION START --- */}
+              {/* Wrapped the Image and H2 in a flex container */}
+              <div className="flex items-center mb-6">
+                <Image
+                  src="/Cat Kitten Sticker.gif"
+                  alt="Animated cat sticker"
+                  width={40}  
+                  height={40} 
+                  unoptimized={true}
+                  className="mr-3" 
+                />
+                <h2 className="text-2xl text-pink-500 font-semibold"> {/* Removed mb-6 */}
+                  My Dearest Tinkerbell,
+                </h2>
+              </div>
               
               {/* Added a container for slightly better text formatting */}
               <div className="space-y-4 text-left text-lg">
@@ -179,7 +194,8 @@ function Card() {
         <div className="mt-6">
           <button
             onClick={() => router.push('/dashboard')}
-            className="px-6 py-3 bg-white text-purple-600 font-bold rounded-full shadow-md transition-transform transform hover:scale-105 border border-purple-200"
+            // CLASSNAME UPDATED TO MATCH MEMORIES PAGE
+            className="px-8 py-4 bg-gray-500 text-white font-bold rounded-full shadow-lg transition-transform transform hover:scale-105"
           >
             Go to Dashboard
           </button>

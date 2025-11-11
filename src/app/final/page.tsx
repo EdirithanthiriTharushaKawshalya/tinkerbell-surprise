@@ -3,6 +3,7 @@
 
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 // Simple animation variant for staggering children
 const containerVariants = {
@@ -34,13 +35,14 @@ export default function Final() {
         initial="hidden"
         animate="visible"
       >
-        {/* Animated Heart */}
-        <motion.div
-          variants={itemVariants}
-          className="text-6xl md:text-8xl mb-8"
-        >
-          ❤️
-        </motion.div>
+        <Image
+                src="/licking.gif" // IMPORTANT: Add 'bunny.gif' to your /public folder
+                alt="Animated bunny peeking"
+                width={200}
+                height={200}
+                unoptimized={true} // Good for GIFs to prevent optimization issues
+                className="mb-4"
+              />
 
         {/* Animated Text Lines */}
         <motion.h1

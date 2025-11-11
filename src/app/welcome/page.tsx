@@ -4,7 +4,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Confetti from 'react-confetti';
-
+import Image from 'next/image';
 // A helper hook to get the window size for the confetti
 const useWindowSize = () => {
   const [windowSize, setWindowSize] = useState({
@@ -55,7 +55,14 @@ export default function Welcome() {
       
       {/* Page Content */}
       <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
-        
+        <Image
+                          src="/Happy I Love You Sticker.gif"
+                          alt="Animated cat sticker"
+                          width={80}  
+                          height={80} 
+                          unoptimized={true}
+                          className="mr-3" 
+                        />
         {/* Welcome Message */}
         <h1 className="text-4xl md:text-6xl font-bold text-pink-600 mb-8 animate-pulse">
           Welcome to your 20s, my Tinkerbell ❤️
