@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { db } from '@/lib/firebase'; // Import our db connection
 import { doc, getDoc, Timestamp } from 'firebase/firestore';
+import Image from 'next/image'; // <-- NEW: Import the Image component
 
 export default function Home() {
   const router = useRouter();
@@ -89,7 +90,15 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
       
-  
+      {/* === NEW: Animated Bunny GIF === */}
+      <Image
+        src="/bunny.gif" // IMPORTANT: Add 'bunny.gif' to your /public folder
+        alt="Animated bunny peeking"
+        width={200}
+        height={200}
+        unoptimized={true} // Good for GIFs to prevent optimization issues
+        className="mb-4"
+      />
 
       {/* Countdown Text */}
       <p className="text-2xl md:text-3xl font-light mb-8">

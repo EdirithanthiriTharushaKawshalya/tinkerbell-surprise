@@ -3,6 +3,7 @@
 
 import { useState, useEffect, Suspense } from 'react'; // Import Suspense
 import { useRouter, useSearchParams } from 'next/navigation'; // Import useSearchParams
+import Image from 'next/image'; // Use Next.js Image component to avoid DOM Image type conflicts
 import { storage } from '@/lib/firebase'; // Import our db AND storage
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import { motion } from 'framer-motion';
@@ -58,9 +59,15 @@ function Memories() {
 
   return (
     <main className="flex flex-col items-center min-h-screen p-8 bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
-      
       {/* Header */}
-      <h1 className="text-3xl md:text-5xl font-bold text-pink-600 mt-8 mb-4">
+      <Image
+                    src="/heart.gif" // IMPORTANT: Add 'bunny.gif' to your /public folder
+                    alt="Animated bunny peeking"
+                    width={100}
+                    height={100}
+                    unoptimized={true} 
+                  />
+      <h1 className="text-3xl md:text-5xl font-bold text-pink-600 mb-4">
         Remember When...
       </h1>
       <p className="text-lg mb-8">A quick trip down memory lane, just for you.</p>

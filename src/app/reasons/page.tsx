@@ -1,6 +1,7 @@
 // src/app/reasons/page.tsx
 'use client';
 
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { db } from '@/lib/firebase';
@@ -59,10 +60,20 @@ export default function Reasons() {
   return (
     <main className="flex flex-col items-center min-h-screen p-8 bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
       
+      <Image
+              src="/kiss.gif" // IMPORTANT: Add 'bunny.gif' to your /public folder
+              alt="Animated bunny peeking"
+              width={200}
+              height={200}
+              unoptimized={true} // Good for GIFs to prevent optimization issues
+              className="mb-4"
+            />
+
       {/* Header */}
       <h1 className="text-3xl md:text-5xl font-bold text-pink-600 mt-8 mb-4">
         Why I Love You:
       </h1>
+      
       <p className="text-lg mb-8">An Incomplete List Starting with these 10...</p>
 
       {/* Reasons List */}

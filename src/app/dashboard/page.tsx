@@ -3,6 +3,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { db } from '@/lib/firebase';
 import { collection, getDocs, QueryDocumentSnapshot, DocumentData } from 'firebase/firestore';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -153,7 +154,14 @@ export default function Dashboard() {
 
   return (
     <main className="flex flex-col items-center min-h-screen p-4 md:p-8 bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
-      <h1 className="text-3xl md:text-5xl font-bold text-pink-600 mt-8 mb-8">
+      <Image
+                          src="/love.gif" // IMPORTANT: Add 'bunny.gif' to your /public folder
+                          alt="Animated bunny peeking"
+                          width={150}
+                          height={150}
+                          unoptimized={true} 
+                        />
+      <h1 className="text-2xl md:text-5xl font-bold text-pink-600 mt-8 mb-8">
         A Collection for My Love ❤️
       </h1>
       
