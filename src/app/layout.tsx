@@ -2,8 +2,6 @@
 import type { Metadata } from 'next';
 import { Inter, Great_Vibes } from 'next/font/google';
 import './globals.css';
-import Snowfall from "@/components/Snowfall";
-import BackgroundMusic from '@/components/BackgroundMusic';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,7 +24,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Snowfall /> {/* 2. Add it here, inside the body */}
         {children}
       </body>
     </html>

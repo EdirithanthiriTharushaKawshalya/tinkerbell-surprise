@@ -8,50 +8,99 @@ import { db } from '@/lib/firebase';
 import { collection, getDocs, QueryDocumentSnapshot, DocumentData } from 'firebase/firestore';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// --- Re-usable Cake Component ---
+// --- Re-usable Cake Component (UPDATED TO NEXT LEVEL UI) ---
 function InteractiveCake() {
   const [isLit, setIsLit] = useState(true);
-  return (
-    <div className="flex flex-col items-center justify-center p-4">
-      <h2 className="text-xl font-bold text-pink-600 mb-4">Make Another Wish</h2>
-      
-      {/* Cake & Candle */}
-      <div className="relative mb-8 mt-12">
-        <AnimatePresence>
-          {isLit && (
-            <motion.div
-              className="w-3 h-6 bg-yellow-400 rounded-t-full rounded-b-lg absolute left-1/2 -translate-x-1/2 -top-12 z-30"
-              style={{ boxShadow: '0 0 10px 3px #fde047' }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, scale: 0.5 }}
-            />
-          )}
-        </AnimatePresence>
-        
-        {/* Candle - Added z-20 */}
-        <div className="w-4 h-8 bg-white rounded-t-md absolute left-1/2 -translate-x-1/2 -top-8 z-20" />
-        
-        {/* === NEW CAKE STRUCTURE (Scaled Down) === */}
-        <div className="flex flex-col items-center">
-          
-          {/* Top Tier (Frosting) - Scaled down from w-56, h-20 */}
-          <div className="w-36 h-14 bg-white rounded-lg shadow-lg z-10" />
-          
-          {/* Middle Tier - Scaled down from w-64, h-20 */}
-          <div className="w-44 h-14 bg-pink-400 rounded-lg shadow-md -mt-3 z-0" />
-          
-          {/* Bottom Tier - Scaled down from w-72, h-24 */}
-          <div className="w-48 h-16 bg-pink-300 rounded-lg shadow-xl -mt-3" />
-        </div>
-        {/* === END NEW CAKE === */}
 
+  return (
+    <div className="flex flex-col items-center justify-center p-4 w-full overflow-hidden">
+      <h2 className="text-xl font-bold text-pink-600">Make Another Wish</h2>
+      
+      {/* Cake Container - Scaled down to fit the card */}
+      <div className="relative mt-14 mb-8 scale-[0.65] transform origin-center">
+        
+        {/* 1. Candle & Flame Area */}
+        <div className="absolute left-1/2 -translate-x-1/2 -top-[60px] z-50">
+          <AnimatePresence>
+            {isLit ? (
+              // --- REALISTIC FLAME ---
+              <motion.div
+                key="flame"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ 
+                  scale: [1, 1.1, 1, 1.2, 1], // Flickering size
+                  rotate: [-2, 2, -2, 2, 0],  // Flickering rotation
+                  opacity: 1 
+                }}
+                exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.3 } }}
+                transition={{ duration: 0.5, repeat: Infinity }}
+                className="w-6 h-10 bg-gradient-to-t from-orange-500 via-yellow-400 to-yellow-200 rounded-full rounded-b-md shadow-[0_0_20px_5px_rgba(255,200,0,0.6)] origin-bottom"
+              />
+            ) : (
+              // --- SMOKE EFFECT (When blown out) ---
+              <div className="relative">
+                {[...Array(5)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute bottom-0 left-1/2 w-4 h-4 bg-gray-400 rounded-full blur-sm"
+                    initial={{ opacity: 0.8, scale: 0.5, x: 0, y: 0 }}
+                    animate={{ 
+                      opacity: 0, 
+                      scale: 2, 
+                      y: -80 - (i * 20), // Go up
+                      x: (i % 2 === 0 ? 20 : -20) + (Math.random() * 10), // Drift left/right
+                    }}
+                    transition={{ duration: 2, delay: i * 0.1, ease: "easeOut" }}
+                  />
+                ))}
+              </div>
+            )}
+          </AnimatePresence>
+          
+          {/* The Candle Stick */}
+          <div className="w-4 h-16 bg-white border border-gray-100 rounded-sm relative overflow-hidden shadow-sm mx-auto mt-1">
+             <div className="absolute w-full h-4 bg-pink-300 top-2 -skew-y-12 opacity-50"></div>
+             <div className="absolute w-full h-4 bg-pink-300 top-8 -skew-y-12 opacity-50"></div>
+             <div className="absolute w-full h-4 bg-pink-300 top-14 -skew-y-12 opacity-50"></div>
+          </div>
+        </div>
+
+        {/* 2. The Cake Layers */}
+        <div className="flex flex-col items-center relative">
+
+          {/* Top Tier */}
+          <div className="w-48 h-16 bg-gradient-to-r from-pink-100 to-white rounded-xl shadow-lg z-30 relative border-b-4 border-pink-200">
+            {/* Frosting Drips */}
+            <div className="absolute -bottom-2 left-2 w-4 h-6 bg-pink-200 rounded-full"></div>
+            <div className="absolute -bottom-3 left-8 w-4 h-8 bg-pink-200 rounded-full"></div>
+            <div className="absolute -bottom-2 left-16 w-5 h-5 bg-pink-200 rounded-full"></div>
+            <div className="absolute -bottom-3 right-8 w-4 h-7 bg-pink-200 rounded-full"></div>
+            {/* Sprinkles */}
+            <div className="absolute top-4 left-6 w-2 h-2 bg-blue-300 rounded-full"></div>
+            <div className="absolute top-6 right-10 w-2 h-2 bg-yellow-300 rounded-full"></div>
+          </div>
+          
+          {/* Middle Tier */}
+          <div className="w-60 h-20 bg-gradient-to-r from-pink-300 to-pink-200 rounded-xl shadow-md -mt-4 z-20 relative border-b-4 border-pink-400/30">
+             <div className="absolute top-8 left-10 w-2 h-2 bg-white rounded-full opacity-80"></div>
+             <div className="absolute bottom-6 right-12 w-2 h-2 bg-white rounded-full opacity-80"></div>
+          </div>
+          
+          {/* Bottom Tier */}
+          <div className="w-72 h-24 bg-gradient-to-r from-pink-500 to-pink-400 rounded-xl shadow-xl -mt-4 z-10 relative flex items-center justify-center">
+             <div className="w-full h-1 bg-pink-600/20 absolute top-1/2"></div>
+          </div>
+
+          {/* Plate */}
+          <div className="w-80 h-6 bg-white/40 rounded-[50%] absolute -bottom-2 blur-[1px] shadow-xl z-0"></div>
+        </div>
       </div>
+
       <button
         onClick={() => setIsLit(!isLit)}
-        className="px-6 py-2 bg-purple-500 text-white font-bold rounded-full shadow-md text-sm transition-transform transform hover:scale-105"
+        className="px-6 py-2 bg-purple-500 text-white font-bold rounded-full shadow-md text-sm transition-transform transform hover:scale-105 z-20 relative"
       >
-        {isLit ? 'Blow out candle 🎂' : 'Make another wish?'}
+        {isLit ? 'Blow out candle 🎂' : 'Relight Candle ✨'}
       </button>
     </div>
   );
@@ -75,15 +124,12 @@ function InteractiveCard() {
         >
           <p className="text-md text-pink-500">To My One and Only,</p>
           
-          {/* === UPDATE === */}
           <p
             className="text-gray-700 text-sm cursor-pointer hover:underline"
-            // ADDED ?from=dashboard TO THE URL
             onClick={() => router.push('/card?from=dashboard')}
           >
             Want to re-read your letter darling?
           </p>
-          {/* === END UPDATE === */}
 
         </motion.div>
         
@@ -98,7 +144,7 @@ function InteractiveCard() {
           transition={{ duration: 0.5 }}
         />
         
-        {/* Envelope Front (This was covering the letter) */}
+        {/* Envelope Front */}
         <div className="absolute w-full h-full bg-pink-300 rounded-lg" style={{ zIndex: 105 }} />
       </div>
       <button
@@ -120,7 +166,7 @@ interface Reason {
 
 // --- Main Dashboard Page ---
 export default function Dashboard() {
-  const router = useRouter(); // This router is used by the Memories card
+  const router = useRouter(); 
   const [reasons, setReasons] = useState<Reason[]>([]);
   const [currentReason, setCurrentReason] = useState<Reason | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -156,12 +202,12 @@ export default function Dashboard() {
   return (
     <main className="relative z-10 flex flex-col items-center min-h-screen p-4 md:p-8 bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
       <Image
-                          src="/love.gif" // IMPORTANT: Add 'bunny.gif' to your /public folder
-                          alt="Animated bunny peeking"
-                          width={150}
-                          height={150}
-                          unoptimized={true} 
-                        />
+        src="/love.gif" 
+        alt="Animated bunny peeking"
+        width={150}
+        height={150}
+        unoptimized={true} 
+      />
       <h1 className="text-2xl md:text-5xl font-bold text-pink-600 mt-8 mb-8">
         A Collection for My Love ❤️
       </h1>
@@ -207,18 +253,18 @@ export default function Dashboard() {
         >
           <h2 className="text-2xl font-bold text-pink-600 mb-4">The Story of Us</h2>
           <Image
-                          src="/heart love.gif" // IMPORTANT: Add 'bunny.gif' to your /public folder
-                          alt="Animated heart love"
-                          width={100}
-                          height={100}
-                          unoptimized={true} 
-                          className="mb-4"
-                        />
+            src="/heart love.gif" 
+            alt="Animated heart love"
+            width={100}
+            height={100}
+            unoptimized={true} 
+            className="mb-4"
+          />
           <p className="text-gray-700 text-lg">Take a walk down memory lane</p>
         </motion.div>
 
         {/* Card 3: Interactive Cake */}
-        <div className="bg-white/70 rounded-4xl shadow-lg p-6">
+        <div className="bg-white/70 rounded-4xl shadow-lg p-6 flex items-center justify-center">
           <InteractiveCake />
         </div>
         

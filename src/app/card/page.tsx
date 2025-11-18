@@ -35,19 +35,7 @@ function Card() {
   return (
     <main className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
       
-      {/* This h1 is visible when the modal is closed */}
-      <AnimatePresence>
-        {!isOpen && (
-          <motion.h1
-            className="text-3xl md:text-5xl font-bold text-pink-600 mb-8"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-          >
-            A Special Letter for You!
-          </motion.h1>
-        )}
-      </AnimatePresence>
+      
 
 
       {/* Envelope Wrapper */}
@@ -83,6 +71,20 @@ function Card() {
         {/* A simple "front" to cover the card before opening */}
         <div className="absolute w-full h-full bg-pink-300 rounded-lg" style={{ zIndex: 105 }} />
       </div>
+
+      {/* This h1 is visible when the modal is closed */}
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.h1
+            className="text-xl font-bold text-pink-600 mb-4 mt-2"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+          >
+            A Special Letter for You!
+          </motion.h1>
+        )}
+      </AnimatePresence>
 
       {/* "Open" Button (Only shows when closed) */}
       <AnimatePresence>
