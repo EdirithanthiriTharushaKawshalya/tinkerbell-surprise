@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { db } from '@/lib/firebase';
-// 1. Import 'query' and 'limit'
 import { collection, getDocs, QueryDocumentSnapshot, DocumentData, query, limit } from 'firebase/firestore';
 import { motion } from 'framer-motion';
 
@@ -17,18 +16,16 @@ interface Reason {
 }
 
 export default function Reasons() {
-  const router = useRouter(); // We need this for navigation
+  const router = useRouter();
   const [reasons, setReasons] = useState<Reason[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchReasons() {
       try {
-        // 2. Create a query that limits our results to 10
         const reasonsCollectionRef = collection(db, 'reasons');
         const q = query(reasonsCollectionRef, limit(10));
         
-        // 3. Execute the limited query
         const querySnapshot = await getDocs(q);
         
         const reasonsList = querySnapshot.docs.map((doc: QueryDocumentSnapshot<DocumentData>) => {
@@ -58,7 +55,7 @@ export default function Reasons() {
   };
 
   return (
-    <main className="flex flex-col items-center min-h-screen p-8 bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
+    <main className="flex flex-col items-center min-h-screen p-8 bg-transparent text-gray-800">
       
       <Image
               src="/kiss.gif" // IMPORTANT: Add 'bunny.gif' to your /public folder
@@ -98,7 +95,7 @@ export default function Reasons() {
         )}
       </div>
 
-      {/* 4. YOUR NEW MESSAGE */}
+      {/* YOUR NEW MESSAGE */}
       {!isLoading && (
         <div className="text-center mb-8 p-4 bg-white/50 rounded-lg shadow-inner">
           <p className="text-lg text-gray-700">

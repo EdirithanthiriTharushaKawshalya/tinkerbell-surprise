@@ -26,7 +26,7 @@ export default function Final() {
   const router = useRouter();
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
+    <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-transparent text-gray-800">
       
       {/* Animated container for the text */}
       <motion.div

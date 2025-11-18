@@ -17,7 +17,7 @@ function InteractiveCake() {
       <h2 className="text-xl font-bold text-pink-600">Make Another Wish</h2>
       
       {/* Cake Container - Scaled down to fit the card */}
-      <div className="relative mt-14 mb-8 scale-[0.65] transform origin-center">
+      <div className="relative mt-14 mb-3 scale-[0.65] transform origin-center">
         
         {/* 1. Candle & Flame Area */}
         <div className="absolute left-1/2 -translate-x-1/2 -top-[60px] z-50">
@@ -200,7 +200,7 @@ export default function Dashboard() {
   };
 
   return (
-    <main className="relative z-10 flex flex-col items-center min-h-screen p-4 md:p-8 bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
+    <main className="relative z-10 flex flex-col items-center min-h-screen p-4 md:p-8 bg-transparent text-gray-800">
       <Image
         src="/love.gif" 
         alt="Animated bunny peeking"

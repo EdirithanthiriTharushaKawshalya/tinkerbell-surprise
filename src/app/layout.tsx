@@ -2,6 +2,8 @@
 import type { Metadata } from 'next';
 import { Inter, Great_Vibes } from 'next/font/google';
 import './globals.css';
+// 1. Import the new component
+import MagicFlowBackground from '@/components/MagicalBackground';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,6 +26,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
+        <MagicFlowBackground /> 
+        
         {children}
       </body>
     </html>

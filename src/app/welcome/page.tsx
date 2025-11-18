@@ -54,7 +54,7 @@ export default function Welcome() {
       />
       
       {/* Page Content */}
-      <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
+      <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-transparent text-gray-800">
         <Image
                           src="/Happy I Love You Sticker.gif"
                           alt="Animated cat sticker"

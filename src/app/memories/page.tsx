@@ -58,7 +58,7 @@ function Memories() {
   };
 
   return (
-    <main className="flex flex-col items-center min-h-screen p-8 bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
+    <main className="flex flex-col items-center min-h-screen p-8 bg-transparent text-gray-800">
       {/* Header */}
       <Image
                     src="/heart.gif" // IMPORTANT: Add 'bunny.gif' to your /public folder

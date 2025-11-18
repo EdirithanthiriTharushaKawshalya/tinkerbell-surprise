@@ -22,7 +22,8 @@ export default function Cake() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800 overflow-hidden">
+    // Background removed here: bg-transparent
+    <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-transparent text-gray-800 overflow-hidden">
       
       {/* === NEW UPGRADED CAKE UI === */}
       <div className="relative mt-10 mb-12 z-20 scale-110 md:scale-125">

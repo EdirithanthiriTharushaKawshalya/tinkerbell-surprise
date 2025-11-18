@@ -80,7 +80,8 @@ export default function Home() {
   // Show a loading screen while we get the time
   if (isLoading) {
     return (
-      <main className="flex items-center justify-center min-h-screen bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
+      // Background removed here: bg-transparent
+      <main className="flex items-center justify-center min-h-screen bg-transparent text-gray-800">
         <Image
         src="/loding.gif" // IMPORTANT: Add 'bunny.gif' to your /public folder
         alt="Animated bunny peeking"
@@ -95,7 +96,8 @@ export default function Home() {
 
   // The main countdown UI
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
+    // Background removed here: bg-transparent
+    <main className="flex flex-col items-center justify-center min-h-screen p-8 text-center bg-transparent text-gray-800">
       
       {/* === NEW: Animated Bunny GIF === */}
       <Image

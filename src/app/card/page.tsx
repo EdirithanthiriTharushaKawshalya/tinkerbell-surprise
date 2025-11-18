@@ -33,11 +33,8 @@ function Card() {
   };
 
   return (
-    <main className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-b from-pink-100 to-purple-200 text-gray-800">
+    <main className="relative z-10 flex flex-col items-center justify-center min-h-screen p-8 bg-transparent text-gray-800">
       
-      
-
-
       {/* Envelope Wrapper */}
       <div className="relative w-[300px] h-[200px] mb-8">
         
