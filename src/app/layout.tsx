@@ -14,7 +14,7 @@ const greatVibes = Great_Vibes({
 });
 
 export const metadata: Metadata = {
-  title: 'Tinkerbell Birthday Surprise',
+  title: 'Tinkerbell',
   description: 'A special surprise...',
 };
 
