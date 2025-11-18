@@ -1,12 +1,16 @@
 // src/app/memories/page.tsx
 'use client';
 
-import { useState, useEffect, Suspense } from 'react'; // Import Suspense
-import { useRouter, useSearchParams } from 'next/navigation'; // Import useSearchParams
-import Image from 'next/image'; // Use Next.js Image component to avoid DOM Image type conflicts
-import { storage } from '@/lib/firebase'; // Import our db AND storage
+import { useState, useEffect, Suspense } from 'react'; 
+import { useRouter, useSearchParams } from 'next/navigation'; 
+import Image from 'next/image'; 
+import { storage } from '@/lib/firebase'; 
 import { ref, listAll, getDownloadURL } from 'firebase/storage';
 import { motion } from 'framer-motion';
+
+// --- NEW IMPORT ---
+import ImageModal from '@/components/ImageModal'; // Import the new modal component
+// ------------------
 
 // Wrap the page in Suspense for useSearchParams
 export default function MemoriesPage() {
@@ -19,22 +23,23 @@ export default function MemoriesPage() {
 
 function Memories() {
   const router = useRouter();
-  const searchParams = useSearchParams(); // Get URL search params
+  const searchParams = useSearchParams(); 
   
-  // Check if the 'from' param exists and equals 'dashboard'
   const fromDashboard = searchParams.get('from') === 'dashboard';
 
   const [imageUrls, setImageUrls] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  
+  // --- NEW STATE for the Modal ---
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  // -------------------------------
 
   useEffect(() => {
-    // 1. Asynchronous function to fetch images
     async function fetchImages() {
       try {
-        const photosRef = ref(storage, 'photos'); // Get reference to the 'photos' folder
-        const response = await listAll(photosRef); // List all items (images) in that folder
+        const photosRef = ref(storage, 'photos'); 
+        const response = await listAll(photosRef); 
 
-        // Get the download URL for each image
         const urls = await Promise.all(
           response.items.map((itemRef) => getDownloadURL(itemRef))
         );
@@ -48,25 +53,38 @@ function Memories() {
       }
     }
     
-    // 2. Call the function
     fetchImages();
-  }, []); // The empty array [] means this runs once
+  }, []); 
 
-  // Function to go to the next page
+  // Function to open the modal
+  const openModal = (url: string) => {
+    setSelectedImage(url);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
+
   const goToNextPage = () => {
-    router.push('/final'); // As per your page flow
+    router.push('/final'); 
   };
 
   return (
     <main className="flex flex-col items-center min-h-screen p-8 bg-transparent text-gray-800">
+      
+      {/* --- NEW: Image Modal Component --- */}
+      <ImageModal imageUrl={selectedImage} onClose={closeModal} />
+      {/* ---------------------------------- */}
+
       {/* Header */}
       <Image
-                    src="/heart.gif" // IMPORTANT: Add 'bunny.gif' to your /public folder
-                    alt="Animated bunny peeking"
-                    width={100}
-                    height={100}
-                    unoptimized={true} 
-                  />
+          src="/heart.gif" 
+          alt="Animated heart"
+          width={100}
+          height={100}
+          unoptimized={true} 
+      />
       <h1 className="text-3xl md:text-5xl font-bold text-pink-600 mb-4">
         Remember When...
       </h1>
@@ -75,12 +93,16 @@ function Memories() {
       {/* Image Gallery */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mb-8">
         {isLoading ? (
-          <p className="text-center">Loading memories...</p>
+          <p className="text-center col-span-full">Loading memories...</p>
         ) : (
           imageUrls.map((url, index) => (
             <motion.div
               key={url}
-              className="overflow-hidden rounded-lg shadow-xl"
+              className="overflow-hidden rounded-lg shadow-xl cursor-pointer" 
+              // --- NEW: Add onClick handler to open the modal ---
+              onClick={() => openModal(url)} 
+              // --------------------------------------------------
+              
               // Animation properties
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -89,17 +111,16 @@ function Memories() {
               <img
                 src={url}
                 alt={`Memory ${index + 1}`}
-                className="w-full h-full object-cover aspect-square"
+                className="w-full h-full object-cover aspect-square hover:opacity-80 transition-opacity" // Added hover effect
               />
             </motion.div>
           ))
         )}
       </div>
 
-      {/* === UPDATED NAVIGATION BUTTONS === */}
+      {/* Navigation Buttons */}
       <div className="flex flex-col sm:flex-row gap-4">
         
-        {/* Only show this button if the user came from the dashboard */}
         {fromDashboard && (
           <button
             onClick={() => router.push('/dashboard')}
@@ -116,7 +137,6 @@ function Memories() {
           The Final Surprise
         </button>
       </div>
-      {/* === END UPDATED NAVIGATION === */}
     </main>
   );
 }
